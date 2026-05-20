@@ -14,7 +14,8 @@ cat \
 ./affixes/prestems.lexc \
 ./stems/verb_stems.lexc \
 ./affixes/verb_suffixes.lexc \
-./stems/noun_stems.lexc \
+./stems/noun_indep_stems.lexc \
+./stems/noun_dep_stems.lexc \
 ./affixes/noun_suffixes.lexc \
 ./stems/pronouns.lexc \
 ./stems/demonstratives.lexc \
