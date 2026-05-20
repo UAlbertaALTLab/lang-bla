@@ -1,0 +1,86 @@
+# Blackfoot vowel accent variation (no weights)
+
+define Consonant [ b | d | g | h | k | l | m | n | p | r | s | t | w | y | z ];
+
+define SpellRelaxWeighted [
+
+á (->) a,
+í (->) i,
+ó (->) o,
+
+a (->) á,
+i (->) í,
+o (->) ó,
+
+# Blackfoot vowel/glide length variation (low weight)
+
+a a a (->) a a::0.25,
+a a (->) a a a::0.25,
+i i i (->) i i::0.25,
+i i (->) i i i::0.25,
+o o o (->) o o::0.25,
+o o (->) o o o::0.25,
+i i (->) i::0.25,
+i i (->) í::0.25,
+í í (->) í::0.25,
+í í (->) i::0.25,
+a a (->) a::0.25,
+a a (->) á::0.25,
+á á (->) á::0.25,
+á á (->) a::0.25,
+o o (->) o::0.25,
+o o (->) ó::0.25,
+ó ó (->) o::0.25,
+ó ó (->) ó::0.25,
+i (->) i i::0.25,
+a (->) a a::0.25,
+o (->) o o::0.25,
+í (->) í í::0.25,
+i (->) í í::0.25,
+i (->) í i::0.25,
+á (->) á á::0.25,
+a (->) á á::0.25,
+a (->) á a::0.25,
+ó (->) ó ó::0.25,
+o (->) ó ó::0.25,
+o (->) ó o::0.25,
+o i (->) o::0.25, !check applicability beyond demonstratives
+o i (->) o o::0.25,
+o i (->) ó::0.25,
+o y i (->) o i::0.25,
+a y i (->) a i::0.25,
+a a y i (->) a i::0.25,
+
+# Blackfoot vowel insertion/deletion (moderately weighted)
+
+a (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+i (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+o (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+á (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+í (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+ó (->) 0::0.5 || [ .#. | Consonant ] _ [ Consonant | .#. ],,
+y i (->) i::0.5 || .#. _,,
+w a (->) 0::0.5 || .#. _,,
+y i (->) 0::0.5 || .#. _,,
+! o (->) 0::0.5 || .#. _,,
+! á (->) 0::0.5 || .#. _,,
+! í (->) 0::0.5 || .#. _,,
+! ó (->) 0::0.5 || .#. _,,
+
+#Other consonant length variation/deletion (moderately weighted)
+
+s s s (->) s s::0.5,,
+s s (->) s s s::0.5,
+m m (->) m::0.5,
+m (->) m m::0.5,
+n (->) n n::0.5,
+n n (->) n::0.5,
+s s (->) s::0.5,
+[..] (->) '::0.25,
+' (->) 0::0.25,,
+n i (->) 0::0.5 || .#. _,,
+k i (->) 0::0.5 || .#. _
+
+];
+
+push SpellRelaxWeighted

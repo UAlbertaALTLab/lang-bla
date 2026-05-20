@@ -1,0 +1,158 @@
+# Copyright © 2026 Alberta Language Technology Lab (ALTLab)
+# http://altlab.ualberta.ca/
+#
+# This program is free software; you can redistribute and/or modify
+# this file under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+# Plains Cree long vowel variation.
+
+define Vshort [ a | i | o ];
+define Vlong  [ â | ê | î | ô ];
+define Vowel [ Vshort | Vlong ];
+
+define Cvoiced [ b | d | g ];
+define Cvoiceless [ p | t | k | c ];
+
+define Consonant [ c | h | k | m | n | p | s | š | t | w | y | Cvoiced ];
+define Stop      [ c | k | p | t ];
+define Glide     [ w | y ];
+define Nasal     [ n | m ];
+define Sibilant  [ s | {sh} | š | c ];
+
+regex [
+
+# short-i elision
+i (->) [ %' | ‘ | ’ ],
+
+â (->) {ā}, # a + combining macron U+0304
+ê (->) {ē}, # e + combining macron U+0304
+î (->) {ī}, # i + combining macron U+0304
+ô (->) {ō}, # o + combining macron U+0304
+
+â (->) ā, # a macron
+ê (->) ē, # e macron
+î (->) ī, # i macron
+ô (->) ō, # o macron
+
+â (->) {â}, # a + combining circumflex accent U+0302
+ê (->) {ê}, # e + combining circumflex accent U+0302
+î (->) {î}, # i + combining circumflex accent U+0302
+ô (->) {ô}, # o + combining circumflex accent U+0302
+
+# Long vowel markings are frequently dropped:
+
+â (->) a,
+ê (->) e,
+î (->) i,
+ô (->) o,
+
+# NS 152 materials consistantly write some vowels as long where Arok's write
+# them as short.
+# E.G. NS 152 give 'askîy' but Arok gives 'askiy' according to SRO standard.
+a (->) â,
+i (->) î,
+o (->) ô,,
+
+# Prefix-final vowel (preceded by consonant) dropped before following morpheme
+# [ a | â | ê | i | î | o | ô ]  (->) 0 || [ c | k | m | n | p | s | t | w | y ] _ %- ,,
+Vowel  (->) 0 || Consonant _ %- ,,
+
+# Sandhi at prefix boundaries
+# %- -> 0 ,
+# [ a | â | ê | i | î | o | ô ] %- [ a | â ] (->) [ a | â ] , 
+# [ a | â | ê | i | î | o | ô ] %- ê (->) [ e | ê ] , 
+# [ a | â | ê | i | î | o | ô ] %- [ i | î ] (->) [ i | î ] , 
+# [ a | â | ê | i | î | o | ô ] %- [ o | ô ] (->) [ o | ô ] , 
+Vowel %- [ a | â ] (->) [ a | â ] , 
+Vowel %- ê (->) [ e | ê ] , 
+Vowel %- [ i | î ] (->) [ i | î ] , 
+Vowel %- [ o | ô ] (->) [ o | ô ] , 
+
+# Dealing with spaces instead of hyphens as separators in multipart words, or missing hyphens
+
+[ %- ] (->) [ %- ]+,           # Multiple hyphens into a single hyphen
+[ %- ] (->) 0,                 # Missing hyphens between prefixes/preverbs
+[ %- ] (->) [ %  | %  | %  ]+, # Multiple non-breaking or standard spaces SPACE + NBSP + NNBSP (in syllabics) to single hyphen
+
+# Dealing with English-influenced divergences from SRO, and misspellings based on modern pronunciation
+
+# Vowels
+[ i | î ] (->) {ee},
+[ a | â ] (->) u,
+ê (->) [ {ay} | {eh} ],
+
+# Consonants
+k (->) g,   # intervocalic voiced pronunciation to stops, maybe context should be added (including <c> overgenerates)
+p (->) b,   # intervocalic voiced pronunciation to stops, maybe context should be added
+t (->) d,   # intervocalic voiced pronunciation to stops, maybe context should be added
+c (->) j,   # English influence on spelling <c>
+
+# Glides
+# e.g., "tanisi ê-isiyihkâsoyan" -> "tan'si ê-sikâsowan"
+# TODO: figure out what conditions this (probably /o/ or /i/)
+# These rules without context are EXCESSIVELY productive!
+# y (->) w,
+# w (->) y,
+
+# Proto-Algonquian dialectal /y/
+ý (->) y,
+
+{iw} (->) {ow},       # Misspelling based on assimilated pronunciation of underlying /i/ as /o/ before /w/
+{ow} (->) {iw},
+{êyiht} (->) {êht},
+{êyiht} (->) {êt},
+{êyim} (->) {êm},
+{iyi} (->) [ î | i ], # Mishearing of vowel-glide-vowel cluster
+{nwa} (->) {no},      # <nwa> is likely to be heard as <no>
+
+c (->) {ch},        # English influence on spelling <c>
+c (->) {tch},       # English influence on spelling <c>
+c (->) {ts} ,,      # Another English influence on spelling <c>
+
+[..] (->) h || _ .#. ,, # Excessive word-final pre-aspiration
+#    h (->) 0 || [ a | i | o | â | ê | î | ô ] _ [ c | k | p | t | g | b | d ],,    # Missing preaspiration before stops
+# [..] (->) h || [ a | i | o | â | ê | î | ô ] _ [ c | k | p | t | g | b | d ],,  # Excessive preaspiration before stops
+   h (->) 0 || Vowel _ Stop ,,    # Missing preaspiration before stops
+[..] (->) h || Vowel _ Stop ,,  # Excessive preaspiration before stops
+
+# Standardizing double-vowel notation for long vowels
+â (->) {aa},
+î (->) {ii},
+ô (->) {oo},
+
+# Standardizing rarer SRO marking of long vowels with accent-aigu
+[ a | â ] (->) á,
+ê (->) é,
+[ i | î ] (->) í,
+[ o | ô ] (->) ó,
+
+# Sibilant variation within Swampy Cree
+
+s (->) š,
+
+# Woods and Swampy Cree to Plains Cree
+[ ý | y ] (->) [ n | t h ] ,,
+ê (->) [ î | i ] ,,
+
+# Adding missing or reduced short i's in interconsonantal contexts
+i (->) 0 || Consonant _ Consonant
+
+# Removing morpheme boundary markers (middle-dots)
+# [..] (->) {·}
+
+];
+
+# Format/explanation:
+# lexical side (->) input
+# Or, in other words:
+# correct (->) in use out there

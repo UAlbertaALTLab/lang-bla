@@ -1,0 +1,30 @@
+LEXICON DEM_STEMS
+am+Dem:am DEM_NUM_SUFFIXES ;
+am+Dem+Dim:amsst DEM_NUM_SUFFIXES ;
+amo+Dem:amo DEM_NUM_SUFFIXES ;
+amo+Dem+Dim:amssto DEM_NUM_SUFFIXES ;
+ann+Dem:ann DEM_NUM_SUFFIXES ;
+ann+Dem+Dim:annst DEM_NUM_SUFFIXES ;
+anno+Dem:anno DEM_NUM_SUFFIXES ;
+anno+Dem+Dim:annssto DEM_NUM_SUFFIXES ;
+om+Dem:om DEM_NUM_SUFFIXES ;
+om+Dem+Dim:omsst DEM_NUM_SUFFIXES ;
+
+LEXICON DEM_NUM_SUFFIXES
++A+Sg:%>%^DEMwa DEM_POSTINFL ;
++A+Obv:%>yi DEM_POSTINFL ;
++I+Sg:%>yi DEM_POSTINFL ;
++A+Pl:%>%^DEMiksi DEM_POSTINFL ;
++I+Pl:%>%^DEMistsi DEM_POSTINFL ;
+
+LEXICON DEM_POSTINFL
++Stat:%>ma VBLZ ;
++Movg:%>ya VBLZ ;
++Invs:%>hka VBLZ ;
++MT:%>ka VBLZ ;
+0 VBLZ ;
+
+LEXICON VBLZ
++Vblz:%>o'ka # ;
++Vblz:%>ayi # ;
+0 # ;

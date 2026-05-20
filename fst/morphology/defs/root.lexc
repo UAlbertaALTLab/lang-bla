@@ -1,0 +1,11 @@
+!! Blackfoot Nominal and Verbal Morphology
+
+!! from verb file
+
+LEXICON Root
+@P.pos.VERB@ VERB_PREFIXES ;
+@P.pos.NOUN@ NOUN_PREFIXES ;
+DEM_STEMS ;
+PART ;
+PERS_PRON ;
+INTERR_PRON ;

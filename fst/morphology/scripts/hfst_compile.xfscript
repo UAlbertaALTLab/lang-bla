@@ -1,0 +1,45 @@
+! Instructions for compiling revised verb model for Plains Cree
+! Output as HFST
+
+read lexc lexicon.lexc
+define Morph
+
+source phonology/phonology.xfscript
+define Phon
+
+source orthography/spellrelax_weighted.xfscript
+define SpellRelax
+
+define nLemmaNorm [ n <- n1 ];
+define rmBx [ Bx -> 0 ];
+
+define ErrTags [ "+Err/Morph" | "+Err/Orth" ];
+define ErrFilter ~$[ ErrTags ];
+
+set flag-is-epsilon ON
+
+! Normative FST without morpheme boundaries
+
+define FSTnorm [ ErrFilter .o. nLemmaNorm .o. Morph .o. Phon .o. rmBx ];
+
+push FSTnorm
+invert net
+save stack fst/analyser-gt-norm.hfst
+invert net
+save stack fst/generator-gt-norm.hfst
+clear stack
+
+! Normative generator FST with morpheme boundaries in surface forms
+
+define FSTbound [ nLemmaNorm .o. Morph .o. Phon ].i;
+push FSTbound
+invert net
+save stack fst/generator-gt-norm-bound.hfst
+clear stack
+
+! Descriptive analyzer FST with spell-relaxation rules (without morpheme
+
+define FSTdesc [ nLemmaNorm .o. Morph .o. Phon .o. rmBx .o. SpellRelax ];
+push FSTdesc
+invert net
+save stack fst/analyser-gt-desc.hfst
