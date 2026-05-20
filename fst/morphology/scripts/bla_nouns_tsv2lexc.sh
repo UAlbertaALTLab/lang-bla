@@ -22,23 +22,37 @@ gawk -F"\t" '{
   if(match(contlex, "NI")!=0)
     pos="NI";
 
+  if(contlex=="")
+    check="CHECK";
+  else
+    check="";  
+
   if(notes!="")
     initlexc=sprintf("%s%s:%s%s %s ; ! %s\n", flags, stem, flags, initial, contlex, notes);
   else
     initlexc=sprintf("%s%s:%s%s %s ;\n", flags, stem, flags, initial, contlex);
-  initstems[pos]=initstems[pos] initlexc;
+  if(check=="")
+    initstems[pos]=initstems[pos] initlexc;
+  else
+    initstems[pos]=initstems[pos] "! CHECK: " initlexc;
 
   if(notes!="")
     personlexc=sprintf("%s%s:%s%s %s ; ! %s\n", flags, stem, flags, initial, contlex, notes);
   else
     personlexc=sprintf("%s%s:%s%s %s ;\n", flags, stem, flags, initial, contlex);
-  personstems[pos]=personstems[pos] elselexc;
+  if(check=="")
+    personstems[pos]=personstems[pos] elselexc;
+  else
+    personstems[pos]=personstems[pos] "! CHECK: " elselexc;
 
   if(notes!="")
     elselexc=sprintf("%s%s:%s%s %s ; ! %s\n", flags, stem, flags, initial, contlex, notes);
   else
     elselexc=sprintf("%s%s:%s%s %s ;\n", flags, stem, flags, initial, contlex);
-  elsestems[pos]=elsestems[pos] elselexc;
+  if(check=="")
+    elsestems[pos]=elsestems[pos] elselexc;
+  else
+    elsestems[pos]=elsestems[pos] "! CHECK: " elselexc;
 
 }
 END {
@@ -59,12 +73,12 @@ END {
      }
   for(p in personstems)
      {
-       printf "LEXICON INIT_%s_STEMS\n", p;
+       printf "LEXICON PERS_%s_STEMS\n", p;
        printf "%s\n", personstems[p];
      }
   for(p in elsestems)
      {
-       printf "LEXICON INIT_%s_STEMS\n", p;
+       printf "LEXICON %s_STEMS\n", p;
        printf "%s\n", elsestems[p];
      }
 }'
