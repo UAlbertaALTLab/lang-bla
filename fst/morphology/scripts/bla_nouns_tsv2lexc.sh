@@ -42,6 +42,16 @@ gawk -F"\t" '{
 
 }
 END {
+  printf "!! Blackfoot noun stems\n"
+  printf "\n";
+  printf "LEXICON NOUN_STEMS\n";
+  printf "@R.pos.NOUN@ NA_STEMS ;\n";
+  printf "@R.pos.NOUN@ NI_STEMS ;\n";
+  printf "@R.class.VAI@ NA_STEMS ;\n";
+  printf "@R.class.VII@ NI_STEMS ;\n";
+  printf "\n";
+
+
   for(p in initstems)
      {
        printf "LEXICON INIT_%s_STEMS\n", p;
