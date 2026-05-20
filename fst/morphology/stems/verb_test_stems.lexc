@@ -1,0 +1,89 @@
+LEXICON VERB_STEMS
+! LEXICON PREFIXES
+@R.class.VAI@	VAI_STEMS ;
+@R.class.VII@	VII_STEMS ;
+@R.class.VTI@	VTI_STEMS ;
+@R.class.VTA@	VTA_STEMS ;
+@R.pos.NOUN@	VAI_STEMS ;
+@R.pos.NOUN@	VII_STEMS ;
+@R.pos.NOUN@	VTI_STEMS ;
+@R.pos.NOUN@	VTA_STEMS ;    
+!@R.pos.NOMINALIZE@:@R.pos.NOMINALIZE@ VAI_STEMS ;
+!@R.pos.NOMINALIZE@:@R.pos.NOMINALIZE@ VII_STEMS ;
+!@R.pos.NOMINALIZE@:@R.pos.NOMINALIZE@ VTI_STEMS ;
+!@R.pos.NOMINALIZE@:@R.pos.NOMINALIZE@ VTA_STEMS ;
+
+LEXICON INIT_VAI_STEMS
+a'po'taki:a'po'taki VAI ;
+itapoo:%^IMPitapoo%^DIPH VAI ;
+okska'si:okska'si VAI ;
+ooyi:ooyi	VAI ;
+waahkayi:waahkayi VAI ;
+waahkayi:waahkayimm%^3MM VAI ;
+
+LEXICON PERS_VAI_STEMS
+a'po'taki:a'po'taki VAI ;
+itapoo:itapoo%^DIPH VAI ;
+okska'si:okska'si VAI ;
+ooyi:i2oyi	VAI ;
+waahkayi:wahkayi VAI ;
+waahkayi:wahkayimm%^3MM VAI ;
+
+LEXICON VAI_STEMS
+a'po'taki:a'po'taki VAI ;
+itapoo:itapoo%^DIPH VAI ;
+okska'si:okska'si VAI ;
+ooyi:i2oyi	VAI ;
+waahkayi:wahkayi VAI ;
+waahkayi:wahkayimm%^3MM VAI ;
+
+LEXICON INIT_VII_STEMS
+soka'pii:soka'pii VII ;
+ikkitsinaattsi:ikkitsinaattsi	VII ;
+maanikinako:maanikinako	VII ;
+
+LEXICON PERS_VII_STEMS
+soka'pii:soka'pii VII ;
+ikkitsinaattsi:i2kkitsinaattsi	VII ;
+maanikinako:anikinako	VII ;
+
+LEXICON VII_STEMS
+soka'pii:soka'pii VII ;
+ikkitsinaattsi:i2kkitsinaattsi	VII ;
+maanikinako:anikinako	VII ;
+
+LEXICON INIT_VTA_STEMS
+ai'stamatsi:ai'stamatsi VTA ;
+ihtsiipi:ihtsiipi VTA ;
+ikakomimm:ikakomimm VTA ;
+inakat:inakat VTA ;
+ino:ino VTA ;
+ipohkisstoyi:poohkisstoyi VTA ;
+
+LEXICON PERS_VTA_STEMS
+ai'stamatsi:ai'stamatsi VTA ;
+ihtsiipi:ihtsiipi VTA ;
+ikakomimm:ikakomimm VTA ;
+inakat:inakat VTA ;
+ino:ino VTA ;
+ipohkisstoyi:ipohkisstoyi VTA ;
+
+LEXICON VTA_STEMS
+ai'stamatsi:ai'stamatsi VTA ;
+ihtsiipi:ihtsiipi VTA ;
+ikakomimm:i2kakomimm VTA ;
+inakat:i2nakat VTA ;
+ino:i2no VTA ;
+ipohkisstoyi:i2pohkisstoyi VTA ;
+
+LEXICON INIT_VTI_STEMS
+oowatoo:oowatoo VTI ;
+ssksini:issksini VTI ;
+
+LEXICON PERS_VTI_STEMS
+oowatoo:i2owatoo VTI ;
+ssksini:ssksini VTI ;
+
+LEXICON VTI_STEMS
+oowatoo:i2owatoo VTI ;
+ssksini:ssksini VTI ;
